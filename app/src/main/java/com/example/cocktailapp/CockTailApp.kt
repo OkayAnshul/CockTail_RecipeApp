@@ -1,35 +1,36 @@
 package com.example.cocktailapp
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun CockTailApp(modifier: Modifier=Modifier) {
-    val viewModel:DataViewModel= viewModel()
-    val viewState by viewModel.categoryState.value
-LazyColumn(){
-    items(viewState.categoryList){
-        category ->
-    }
-}
-}
-@Composable
-fun showCategory(category: category)
+fun CockTailApp(modifier: Modifier=Modifier)
 {
-        Card(onClick = {}
-        ){
-            Text(text = category.strCategory)
+
+    val navController= rememberNavController()
+    Box(modifier = modifier)
+    {
+        val viewModel:DataViewModel= viewModel()
+        NavHost(navController = navController, startDestination = Screen.CategoryScreen.route) {
+            composable(Screen.CategoryScreen.route) {
+                CategoryScreen(modifier=Modifier,
+                    {navController.navigate(Screen.DrinksScreen.route)},
+                    viewModel)
+            }
+            composable(Screen.DrinksScreen.route) {
+                DrinkScreen(modifier=Modifier,
+                    {
+                        navController.navigate(Screen.DrinkDataScreen.route)}
+                    ,viewModel)
+            }
+            composable(Screen.DrinkDataScreen.route){
+                DrinkDataScreen(modifier =Modifier,viewModel)
+            }
         }
+    }
 }

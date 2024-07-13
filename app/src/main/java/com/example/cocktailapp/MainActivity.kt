@@ -12,8 +12,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cocktailapp.ui.theme.CockTailAppTheme
+import com.example.cocktailapp.ui.theme.akroniumFamily
+import com.example.cocktailapp.ui.theme.aldrichFamily
+import com.example.cocktailapp.ui.theme.alegreyaFamily
+import com.example.cocktailapp.ui.theme.allertaFamily
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -22,15 +32,18 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CockTailAppTheme {
+                val viewModel:DataViewModel= viewModel()
                 Scaffold(modifier = Modifier.fillMaxSize(),
                     topBar = { TopAppBar(
                         title = {
                             Text(
-                                text ="CockTailRecipeApp"
+                                text ="CockTailRecipeApp",
+                                fontFamily = alegreyaFamily,
+                                fontSize = 28.sp,
+                                fontWeight = FontWeight.ExtraBold
                             )}) }) { innerPadding ->
-                    CockTailApp(
-                        modifier=Modifier.padding(innerPadding)
-                    )
+                   CockTailApp(modifier = Modifier.padding(innerPadding))
+//                    DrinkScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

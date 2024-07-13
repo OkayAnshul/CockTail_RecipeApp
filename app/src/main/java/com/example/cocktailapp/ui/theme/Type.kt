@@ -2,10 +2,17 @@ package com.example.cocktailapp.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.cocktailapp.R
 
+val akroniumFamily = FontFamily(Font(R.font.akronim))
+val aldrichFamily = FontFamily(Font(R.font.aldrich))
+val alegreyaFamily = FontFamily(Font(R.font.alegreya_sans_sc_thin))
+val allertaFamily = FontFamily(Font(R.font.allerta_stencil))
+val berkshireFamily =FontFamily(Font(R.font.berkshire_swash))
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
