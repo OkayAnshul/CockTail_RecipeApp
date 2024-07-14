@@ -65,7 +65,8 @@ dependencies {
 
     //NavController
     implementation(libs.androidx.navigation.compose)
-
+    //Toast
+    implementation("io.github.dokar3:sonner:0.3.8")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

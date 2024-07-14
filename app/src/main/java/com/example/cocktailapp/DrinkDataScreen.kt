@@ -10,17 +10,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -28,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.cocktailapp.ui.theme.PlayFamily
 
 @Composable
 fun DrinkDataScreen(modifier: Modifier = Modifier, viewModel: DataViewModel = viewModel()) {
@@ -54,7 +60,8 @@ fun DrinkDataScreen(modifier: Modifier = Modifier, viewModel: DataViewModel = vi
 
 @Composable
 fun ShowDrinkData(eachDrink: EachDrink) {
-    Card(
+    OutlinedCard(colors = CardDefaults.cardColors(
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
@@ -70,7 +77,8 @@ fun ShowDrinkData(eachDrink: EachDrink) {
                 text = eachDrink.strDrink,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
+                fontFamily = PlayFamily,
+                fontSize = 22.sp,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 8.dp)
@@ -78,25 +86,34 @@ fun ShowDrinkData(eachDrink: EachDrink) {
             Image(
                 painter = rememberAsyncImagePainter(eachDrink.strDrinkThumb),
                 contentDescription = eachDrink.strDrink,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1.5f)
+                    .fillMaxWidth().
+                    wrapContentSize()
                     .clip(RoundedCornerShape(8.dp))
+                    .aspectRatio(1.25f)
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             Text(
                 text = "Category: ${eachDrink.strCategory}",
-                modifier = Modifier.padding(bottom = 4.dp)
+                modifier = Modifier.padding(bottom = 4.dp),
+                style = MaterialTheme.typography.titleMedium
             )
             Text(
                 text = "Glass: ${eachDrink.strGlass}",
-                modifier = Modifier.padding(bottom = 4.dp)
+                modifier = Modifier.padding(bottom = 4.dp),
+                style = MaterialTheme.typography.titleMedium
             )
             Text(
                 text = "Instructions: ${eachDrink.strInstructions}",
-                modifier = Modifier.padding(bottom = 8.dp)
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = "Alcoholic: ${eachDrink.strAlcoholic}",
+                modifier = Modifier.padding(vertical = 4.dp),
+                style = MaterialTheme.typography.titleMedium
             )
 
             Text(
@@ -165,19 +182,16 @@ fun ShowDrinkData(eachDrink: EachDrink) {
 //            eachDrink.strIngredient19?.let { eachDrink.strMeasure19?.let { it1 -> IngredientItem(it, it1) } }
 //            eachDrink.strIngredient20?.let { eachDrink.strMeasure20?.let { it1 -> IngredientItem(it, it1) } }
 
-            Text(
-                text = "Alcoholic: ${eachDrink.strAlcoholic}",
-                modifier = Modifier.padding(vertical = 4.dp)
-            )
 
-            Text(
-                text = "Creative Commons Confirmed: ${eachDrink.strCreativeCommonsConfirmed}",
-                modifier = Modifier.padding(vertical = 4.dp)
-            )
+//            Text(
+//                text = "Creative Commons Confirmed: ${eachDrink.strCreativeCommonsConfirmed}",
+//                modifier = Modifier.padding(vertical = 4.dp)
+//            )
 
             Text(
                 text = "Date Modified: ${eachDrink.dateModified}",
-                modifier = Modifier.padding(vertical = 4.dp)
+                modifier = Modifier.padding(vertical = 4.dp),
+                style = MaterialTheme.typography.bodySmall
             )
         }
     }
